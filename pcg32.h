@@ -99,12 +99,32 @@ struct pcg32 {
 
     /// Generate a single precision floating point value on the interval [0, 1)
     float nextFloat() {
-        return std::ldexp((float) nextUInt(), -32);
+        /* Trick from MTGP: generate an uniformly distributed
+           single precision number in [1,2) and subtract 1. */
+        union {
+            uint32_t u;
+            float f;
+        } x;
+        x.u = (nextUInt() >> 9) | 0x3f800000UL;
+        return x.f - 1.0f;
     }
 
-    /// Generate a double precision floating point value on the interval [0, 1)
+    /**
+     * \brief Generate a double precision floating point value on the interval [0, 1)
+     *
+     * \remark Since the underlying random number generator produces 32 bit output,
+     * only the first 32 mantissa bits will be filled (however, the resolution is still
+     * finer than in \ref nextFloat(), which only uses 32 mantissa bits)
+     */
     double nextDouble() {
-        return std::ldexp((double) nextUInt(), -32);
+        /* Trick from MTGP: generate an uniformly distributed
+           double precision number in [1,2) and subtract 1. */
+        union {
+            uint64_t u;
+            double d;
+        } x;
+        x.u = ((uint64_t) nextUInt() << 20) | 0x3ff0000000000000ULL;
+        return x.d - 1.0;
     }
 
     /**
