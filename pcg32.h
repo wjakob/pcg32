@@ -62,7 +62,7 @@ struct pcg32 {
         state = oldstate * PCG32_MULT + inc;
         uint32_t xorshifted = (uint32_t) (((oldstate >> 18u) ^ oldstate) >> 27u);
         uint32_t rot = (uint32_t) (oldstate >> 59u);
-        return (xorshifted >> rot) | (xorshifted << ((-rot) & 31));
+        return (xorshifted >> rot) | (xorshifted << ((~rot + 1u) & 31));
     }
 
     /// Generate a uniformly distributed number, r, where 0 <= r < bound
@@ -81,7 +81,7 @@ struct pcg32 {
         // because this version will calculate the same modulus, but the LHS
         // value is less than 2^32.
 
-        uint32_t threshold = -bound % bound;
+        uint32_t threshold = (~bound+1u) % bound;
 
         // Uniformity guarantees that this loop will terminate.  In practice, it
         // should usually terminate quickly; on average (assuming all bounds are
