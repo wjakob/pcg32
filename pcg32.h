@@ -114,7 +114,7 @@ struct pcg32 {
      *
      * \remark Since the underlying random number generator produces 32 bit output,
      * only the first 32 mantissa bits will be filled (however, the resolution is still
-     * finer than in \ref nextFloat(), which only uses 32 mantissa bits)
+     * finer than in \ref nextFloat(), which only uses 23 mantissa bits)
      */
     double nextDouble() {
         /* Trick from MTGP: generate an uniformly distributed
