@@ -33,6 +33,7 @@
 #include <inttypes.h>
 #include <cmath>
 #include <cassert>
+#include <algorithm>
 
 /// PCG32 Pseudorandom number generator
 struct pcg32 {
