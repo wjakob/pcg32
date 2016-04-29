@@ -195,6 +195,12 @@ struct pcg32 {
         return (int64_t) distance;
     }
 
+    /// Equality operator
+    bool operator==(const pcg32 &other) const { return state == other.state && inc == other.inc; }
+
+    /// Inequality operator
+    bool operator!=(const pcg32 &other) const { return state != other.state || inc != other.inc; }
+
     uint64_t state;  // RNG state.  All values are possible.
     uint64_t inc;    // Controls which RNG sequence (stream) is selected. Must *always* be odd.
 };
