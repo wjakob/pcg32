@@ -3,7 +3,8 @@
  * put together from pieces of the much larger C/C++ codebase.
  * Wenzel Jakob, February 2015
  *
- * The PCG random number generator was developed by Melissa O'Neill <oneill@pcg-random.org>
+ * The PCG random number generator was developed by Melissa O'Neill
+ * <oneill@pcg-random.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
