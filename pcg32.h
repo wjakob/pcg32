@@ -106,7 +106,7 @@ struct pcg32 {
             uint32_t u;
             float f;
         } x;
-        x.u = (nextUInt() >> 9) | 0x3f800000UL;
+        x.u = (nextUInt() >> 9) | 0x3f800000u;
         return x.f - 1.0f;
     }
 
